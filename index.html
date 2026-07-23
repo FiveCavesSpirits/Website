@@ -1,0 +1,1209 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Five Caves Spirits is a premium Irish gin inspired by Cave Hill. Discover the gin, meet the team, and get in touch." />
+  <title>Five Caves Spirits</title>
+
+  <style>
+    :root {
+      --ink: #111315;
+      --muted: #5f6861;
+      --paper: #f6f4ed;
+      --mist: #e6ebe2;
+      --forest: #14372a;
+      --moss: #6d7c4f;
+      --gold: #c8a95c;
+      --rose: #9d5a54;
+      --white: #fffdf7;
+      --shadow: 0 22px 70px rgba(17, 19, 21, .16);
+      --radius: 8px;
+      --gutter: clamp(18px, 4vw, 56px);
+      --content: 1180px;
+      --bottle-clearance: clamp(460px, 50vw, 760px);
+      --bottle-y: 0px;
+      --bottle-initial-offset: 0px;
+      --bottle-scale: 1;
+      --bottle-opacity: 1;
+      --menu-width: clamp(760px, 75vw, 900px);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--paper);
+      scrollbar-width: thin;
+      scrollbar-color: rgba(0, 0, 0, .28) transparent;
+      overflow-x: hidden;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, rgba(20, 55, 42, .06), transparent 28%, transparent 72%, rgba(157, 90, 84, .05)),
+        var(--paper);
+      font-family: Dunbar, Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    body::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    body::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    body::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.28);
+      border-radius: 10px;
+    }
+
+    body::-webkit-scrollbar-thumb:hover {
+      background: rgba(0, 0, 0, 0.4);
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .age-strip {
+      position: fixed;
+      right: 14px;
+      bottom: 14px;
+      z-index: 40;
+      padding: 8px 10px;
+      color: var(--white);
+      background: rgba(17, 19, 21, .72);
+      border: 1px solid rgba(255, 255, 255, .16);
+      border-radius: var(--radius);
+      font-size: 12px;
+    }
+
+    .site-header {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 var(--gutter) clamp(20px, 2vw, 36px);
+      color: var(--white);
+      pointer-events: none;
+      transition: color .2s ease;
+    }
+
+    .site-header.is-scrolled {
+      color: var(--white);
+    }
+
+    .brand-mark {
+      position: relative;
+      z-index: 3;
+      width: clamp(740px, 70vw, 1380px);
+      max-width: 100%;
+      text-decoration: none;
+      margin: 0 auto;
+      pointer-events: none;
+    }
+
+    .brand-mark img {
+      width: 100%;
+      filter: drop-shadow(0 8px 18px rgba(0, 0, 0, .28));
+    }
+
+    .site-header.is-scrolled .brand-mark img {
+      filter: drop-shadow(0 8px 18px rgba(0, 0, 0, .28));
+    }
+
+    .top-left-still {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 42;
+      width: var(--menu-width);
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      mask-image: none;
+      -webkit-mask-image: none;
+    }
+
+    .top-left-still img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: left top;
+      display: block;
+    }
+
+    .nav-toggle {
+      position: absolute;
+      left: var(--gutter);
+      top: var(--gutter);
+      z-index: 60;
+      display: block;
+      width: 44px;
+      height: 44px;
+      border: 1px solid rgba(255, 255, 255, .32);
+      border-radius: var(--radius);
+      background: rgba(17, 19, 21, .18);
+      color: currentColor;
+      cursor: pointer;
+      pointer-events: auto;
+      transform: none;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      margin: 4px auto;
+      background: currentColor;
+      border-radius: 99px;
+    }
+
+    .nav-links {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 55;
+      width: var(--menu-width);
+      min-height: 100svh;
+      display: grid;
+      align-content: center;
+      gap: clamp(18px, 2.5vw, 24px);
+      justify-items: start;
+      padding: clamp(100px, 18vh, 180px) clamp(26px, 3.5vw, 52px) clamp(58px, 12vh, 120px) clamp(86px, 8vw, 126px);
+      color: var(--white);
+      background-color: transparent;
+      border: none;
+      overflow: hidden;
+      box-shadow: none;
+      backdrop-filter: none;
+      font-size: clamp(15px, 1.3vw, 19px);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      text-align: left;
+      filter: none;
+      transform: translateX(-100%);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s ease, transform .2s ease;
+    }
+
+    .nav-links::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url("./images/5_menu.png") left top / auto 100% no-repeat;
+      pointer-events: none;
+      z-index: 0;
+      filter: drop-shadow(0 0 2px rgba(0, 0, 0, .8));
+    }
+
+    .nav-links > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .nav-links a {
+      display: block;
+      min-width: 160px;
+      padding: 14px 0;
+      text-decoration: none;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, .38);
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: var(--gold);
+    }
+
+    .nav-links.open {
+      transform: translateX(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: grid;
+      align-items: end;
+      overflow: hidden;
+      color: var(--white);
+      background-color: #172016;
+      isolation: isolate;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background:
+        url("./images/Napoleon2.JPG") center 80% / cover no-repeat;
+      transform: translateY(calc(var(--bottle-y) * -.08)) scale(1.04);
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      width: min(var(--content), calc(100% - var(--gutter) * 2));
+      margin: 0 auto;
+      padding: 160px 0 clamp(56px, 10vh, 92px);
+      display: grid;
+      grid-template-columns: minmax(300px, 520px) minmax(260px, 380px);
+      gap: clamp(18px, 3vw, 42px);
+      justify-content: space-between;
+      align-items: end;
+    }
+
+    .hero-copy {
+      max-width: 620px;
+      grid-column: 1;
+    }
+
+    .hero-panel {
+      grid-column: 2;
+    }
+
+    .hero-copy,
+    .hero-panel {
+      display: none !important;
+    }
+
+    .hero .hero-inner,
+    .hero .hero-copy,
+    .hero .hero-panel {
+      display: none !important;
+      visibility: hidden !important;
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--gold);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: inherit;
+      font-weight: 700;
+      line-height: 1.04;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(46px, 8vw, 108px);
+      max-width: 760px;
+    }
+
+    h2 {
+      margin: 0 0 18px;
+      font-size: clamp(34px, 5vw, 64px);
+    }
+
+    h3 {
+      margin: 0;
+      font-size: clamp(22px, 2vw, 30px);
+    }
+
+    p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .hero-copy p:not(.eyebrow) {
+      max-width: 580px;
+      margin-top: 18px;
+      color: rgba(255, 253, 247, .86);
+      font-size: clamp(17px, 2vw, 22px);
+    }
+
+    .hero-panel {
+      display: grid;
+      gap: 12px;
+      padding: 18px;
+      border: 1px solid rgba(255, 255, 255, .22);
+      border-radius: var(--radius);
+      background: rgba(255, 253, 247, .12);
+    }
+
+    .hero-panel p {
+      color: rgba(255, 253, 247, .82);
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 30px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 12px 18px;
+      border: 1px solid transparent;
+      border-radius: var(--radius);
+      color: var(--white);
+      background: var(--forest);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .button.secondary {
+      color: var(--white);
+      border-color: rgba(255, 255, 255, .5);
+      background: transparent;
+    }
+
+    .button.light {
+      color: var(--forest);
+      background: var(--white);
+    }
+
+    .bottle-parallax {
+      position: fixed;
+      left: 50%;
+      bottom: clamp(-180px, -10vw, -80px);
+      z-index: 30;
+      width: clamp(260px, 34vw, 580px);
+      max-width: 100%;
+      pointer-events: none;
+      transform: translate3d(-50%, calc(var(--bottle-initial-offset) + var(--bottle-y)), 0) scale(var(--bottle-scale));
+      opacity: var(--bottle-opacity);
+      filter: drop-shadow(0 40px 54px rgba(17, 19, 21, .38));
+      transition: opacity .18s ease;
+    }
+
+    .section {
+      position: relative;
+      z-index: 25;
+      padding: clamp(74px, 11vw, 138px) var(--gutter);
+      background: var(--paper);
+      scroll-margin-top: 84px;
+    }
+
+    .section.alt {
+      background: var(--mist);
+    }
+
+    .section.dark {
+      color: var(--white);
+      background: #363147;
+    }
+
+    .section.dark p {
+      color: rgba(255, 253, 247, .76);
+    }
+
+    #team .section-copy h2 {
+      color: var(--gold);
+    }
+
+    .section-inner {
+      width: min(var(--content), 100%);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, .92fr) minmax(var(--bottle-clearance), .72fr) minmax(0, 1.08fr);
+      gap: clamp(18px, 3vw, 38px);
+      align-items: start;
+    }
+
+    .section-copy {
+      max-width: 520px;
+      position: sticky;
+      top: 110px;
+      grid-column: 1;
+    }
+
+    .section-inner > :not(.section-copy) {
+      grid-column: 3;
+    }
+
+    .section-copy p {
+      font-size: 17px;
+    }
+
+    .section-copy p + p {
+      margin-top: 16px;
+    }
+
+    #product .section-copy h3 em {
+      display: block;
+      margin-top: 4px;
+      color: rgba(17, 19, 21, .64);
+      font-size: .84em;
+      font-style: italic;
+      line-height: 1.08;
+    }
+
+    #product .section-copy h3 + p {
+      margin-top: 18px;
+    }
+
+    .product-availability {
+      margin-top: 18px;
+      color: var(--forest);
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .product-card,
+    .team-card,
+    .contact-card {
+      border: 1px solid rgba(17, 19, 21, .1);
+      border-radius: var(--radius);
+      background: rgba(255, 253, 247, .82);
+      box-shadow: var(--shadow);
+    }
+
+    .product-card {
+      overflow: hidden;
+    }
+
+    #product .section-inner {
+      grid-template-columns: minmax(280px, .95fr) minmax(clamp(340px, 34vw, 500px), .62fr) minmax(340px, 1.18fr);
+    }
+
+    #team .section-inner,
+    #contact .section-inner {
+      width: min(var(--content), 100%);
+      grid-template-columns: minmax(280px, .95fr) minmax(clamp(340px, 34vw, 500px), .62fr) minmax(340px, 1.18fr);
+    }
+
+    #team .section-inner {
+      grid-template-columns: minmax(320px, 1fr) minmax(clamp(240px, 22vw, 360px), .52fr) minmax(0, 1.35fr);
+    }
+
+    .product-column {
+      display: grid;
+      gap: 18px;
+    }
+
+    .product-details {
+      padding: clamp(20px, 4vw, 32px);
+      display: grid;
+      gap: 18px;
+    }
+
+    .product-cocktail {
+      overflow: hidden;
+      margin: 0;
+      border-radius: var(--radius);
+      background: rgba(20, 55, 42, .08);
+    }
+
+    .product-cocktail img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      height: auto;
+      object-fit: cover;
+      object-position: center 70%;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: minmax(320px, 1fr);
+      gap: clamp(18px, 2vw, 28px);
+      align-items: stretch;
+      width: min(100%, 800px, calc(100vw - var(--gutter) * 2));
+      justify-self: start;
+      transform: translateX(clamp(18px, 3vw, 44px));
+    }
+
+    .team-card {
+      min-width: 0;
+      padding: clamp(18px, 1.7vw, 24px);
+    }
+
+    #team .team-card h3 {
+      color: var(--gold);
+    }
+
+    .team-card p {
+      margin-top: 10px;
+      overflow-wrap: break-word;
+    }
+
+    #team .team-card p {
+      color: var(--ink);
+    }
+
+    .team-photo {
+      order: -1;
+      overflow: hidden;
+      border: 1px solid rgba(17, 19, 21, .1);
+      border-radius: var(--radius);
+      background: var(--white);
+      box-shadow: var(--shadow);
+      margin: 0;
+    }
+
+    .team-photo img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      height: auto;
+      min-height: 0;
+      object-fit: cover;
+    }
+
+    .contact-card {
+      min-width: 0;
+      padding: clamp(22px, 4vw, 34px);
+      background: rgba(255, 253, 247, .96);
+      border: 1px solid rgba(17, 19, 21, .08);
+      box-shadow: var(--shadow);
+    }
+
+    .contact-column {
+      display: grid;
+      gap: 24px;
+    }
+
+    .contact-note {
+      margin: 0;
+      padding: 0 clamp(22px, 4vw, 34px);
+      max-width: 680px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.55;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 14px;
+      margin: 22px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .contact-list a {
+      color: var(--ink);
+      font-weight: 800;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 4px;
+      overflow-wrap: anywhere;
+    }
+
+    .socials {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .socials a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 10px 14px;
+      border: 1px solid rgba(17, 19, 21, .12);
+      border-radius: var(--radius);
+      color: var(--ink);
+      background: rgba(255, 253, 247, .88);
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    .footer {
+      position: relative;
+      z-index: 25;
+      padding: 28px var(--gutter);
+      color: rgba(255, 253, 247, .68);
+      background: #0d1f18;
+      font-size: 13px;
+      text-align: center;
+    }
+
+    .footer-credits {
+      display: block;
+      margin-top: 8px;
+      color: rgba(255, 253, 247, .52);
+    }
+
+    .footer-credits a {
+      color: inherit;
+      text-underline-offset: 3px;
+    }
+
+    @media (max-width: 1180px) {
+      .hero-inner,
+      .section-inner {
+        grid-template-columns: 1fr;
+      }
+
+      #product .section-inner {
+        grid-template-columns: 1fr;
+      }
+
+      #team .section-inner,
+      #contact .section-inner {
+        width: min(var(--content), 100%);
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy,
+      .hero-panel,
+      .section-copy,
+      .section-inner > :not(.section-copy) {
+        grid-column: auto;
+      }
+
+      .hero-inner {
+        padding-top: 132px;
+      }
+
+      .hero-panel {
+        max-width: 520px;
+      }
+
+      .section-copy {
+        position: static;
+        max-width: 700px;
+      }
+
+      .bottle-parallax {
+        opacity: .95;
+        width: clamp(300px, 56vw, 520px);
+      }
+
+      .nav-links {
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: min(82vw, 420px);
+        min-height: 100svh;
+        aspect-ratio: auto;
+        background-position: top left;
+        background-size: auto 100%;
+        padding: 130px 32px 64px 72px;
+        align-content: start;
+        gap: 24px;
+      }
+
+      .team-grid {
+        transform: none;
+        justify-self: stretch;
+      }
+
+      .team-photo {
+        margin: 0 auto;
+      }
+
+      .desktop-five-mark {
+        display: none;
+      }
+
+    }
+
+    @media (min-width: 1600px) {
+      :root {
+        --content: 1440px;
+        --bottle-clearance: clamp(440px, 30vw, 620px);
+      }
+
+      .section-inner {
+        gap: clamp(18px, 1.8vw, 32px);
+      }
+
+      #product .section-inner,
+      #team .section-inner,
+      #contact .section-inner {
+        grid-template-columns: minmax(360px, .9fr) minmax(var(--bottle-clearance), .55fr) minmax(420px, .9fr);
+      }
+
+      #product .section-copy {
+        max-width: 620px;
+      }
+
+      #product .product-column,
+      #team .team-grid,
+      #contact .contact-column {
+        align-self: center;
+      }
+
+      #product .product-column,
+      #team .team-grid,
+      #contact .contact-column {
+        max-width: 560px;
+        justify-self: start;
+      }
+
+      #team .team-grid {
+        transform: none;
+      }
+
+      #product .eyebrow {
+        font-size: 15px;
+      }
+
+      #product h2 {
+        font-size: clamp(72px, 5vw, 96px);
+      }
+
+      #product .section-copy p:not(.eyebrow) {
+        font-size: 21px;
+        line-height: 1.55;
+      }
+
+      #product .product-details {
+        padding: clamp(32px, 2.4vw, 46px);
+        gap: 24px;
+      }
+
+      #product .product-details h3 {
+        font-size: clamp(34px, 2.5vw, 48px);
+      }
+
+      #product .product-details p {
+        font-size: 18px;
+      }
+
+      #product .button {
+        font-size: 17px;
+      }
+    }
+
+    @media (min-width: 641px) and (max-width: 1180px) {
+      :root {
+        --menu-width: min(100vw, 760px);
+      }
+
+      .nav-links {
+        width: var(--menu-width);
+      }
+
+      .nav-links::before {
+        background-size: auto 100%;
+      }
+
+      .bottle-parallax {
+        position: absolute;
+        top: 50svh;
+        bottom: auto;
+        left: 50%;
+        width: clamp(525px, 73.5vw, 665px);
+        transform: translate3d(-50%, -50%, 0) scale(1);
+        opacity: 1;
+        z-index: 40;
+      }
+    }
+
+    @media (max-width: 640px) {
+      :root {
+        --mobile-menu-offset: clamp(-112px, -18vw, -54px);
+        --mobile-header-width: clamp(1100px, 290vw, 1800px);
+        --mobile-bottle-width: clamp(500px, 168vw, 980px);
+      }
+
+      .site-header {
+        align-items: flex-start;
+        justify-content: center;
+        padding: 0 14px 12px;
+        width: 100%;
+        inset: 0 auto auto 0;
+      }
+
+      .nav-toggle {
+        left: 28px;
+        top: 28px;
+      }
+
+      .nav-links {
+        top: 0;
+        bottom: 0;
+        right: auto;
+        left: 0;
+        width: 100vw;
+        min-height: 100svh;
+        aspect-ratio: auto;
+        padding: 170px 22px 60px clamp(28px, 10vw, 58px);
+        font-size: 15px;
+        transform: translateX(-100%);
+        transform-origin: top left;
+        align-content: start;
+        gap: 18px;
+      }
+
+      .nav-links.open {
+        transform: translateX(0);
+        opacity: 1;
+        pointer-events: auto;
+        padding-top: 170px;
+        padding-left: clamp(28px, 10vw, 58px);
+        padding-right: 24px;
+      }
+
+      .nav-links::before {
+        background-position: var(--mobile-menu-offset) top;
+        background-size: auto 102svh;
+      }
+
+      .brand-mark {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: var(--mobile-header-width);
+        max-width: none;
+        margin: 0;
+        transform: translateX(-50%);
+      }
+
+      h1 {
+        font-size: clamp(42px, 15vw, 74px);
+      }
+
+      .hero {
+        min-height: 780px;
+        overflow: hidden;
+        z-index: 0;
+      }
+
+      .hero::before {
+        z-index: 0;
+        background:
+          url("./images/Napoleon2.JPG") 72% 100% / cover no-repeat;
+        transform: translateY(-10%) scale(1.2);
+      }
+
+      .hero-inner {
+        align-content: end;
+        padding-bottom: 128px;
+      }
+
+      .hero-panel {
+        display: none;
+      }
+
+      .bottle-parallax {
+        position: absolute;
+        top: 50%;
+        bottom: auto;
+        left: 50%;
+        right: auto;
+        z-index: 40;
+        width: var(--mobile-bottle-width);
+        max-width: 100%;
+        transform: translate3d(-50%, -50%, 0) scale(1);
+      }
+
+      @media (max-width: 640px) and (orientation: landscape) {
+        .bottle-parallax {
+          top: 52%;
+          width: clamp(260px, 60vw, 440px);
+          transform: translate3d(-50%, -50%, 0) scale(0.9);
+          z-index: 40;
+        }
+      }
+
+      .section {
+        z-index: 2;
+      }
+
+      .top-left-still {
+        display: none;
+      }
+
+      .button-row {
+        align-items: stretch;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .team-grid {
+        justify-items: center;
+        gap: 22px;
+      }
+
+      .team-photo {
+        margin: 0 auto;
+        width: min(100%, 520px);
+      }
+
+      .team-photo img {
+        min-height: 260px;
+        width: 100%;
+      }
+
+      .product-image {
+        min-height: 330px;
+      }
+
+      .product-details {
+        padding: 24px;
+      }
+
+      .product-details h3 {
+        font-size: clamp(26px, 9vw, 34px);
+      }
+
+      .age-strip {
+        display: none;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .hero::before,
+      .bottle-parallax {
+        transform: none;
+      }
+    }
+
+    .hero .hero-inner,
+    .hero-copy,
+    .hero-panel {
+      display: none !important;
+      visibility: hidden !important;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header" id="siteHeader">
+    <a class="brand-mark" href="#home" aria-label="Five Caves Spirits home">
+      <img src="./images/Header_tab_v1.png" alt="Five Caves Spirits" />
+    </a>
+
+    <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-controls="navLinks" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+      <a href="#home">Home</a>
+      <a href="#product">Product</a>
+      <a href="#team">Team</a>
+      <a href="#contact">Contact Us</a>
+    </nav>
+  </header>
+
+  <img class="bottle-parallax" id="parallaxBottle" src="./images/bottle_new.png?v=2" alt="" aria-hidden="true" />
+
+  <main>
+    <section class="hero" id="home">
+      <div class="top-left-still" aria-hidden="true">
+        <img src="./images/5_still.png" alt="" />
+      </div>
+      <div class="hero-inner">
+      </div>
+    </section>
+
+    <section class="section" id="product">
+      <div class="section-inner">
+        <div class="section-copy">
+          <p class="eyebrow">The Product</p>
+          <h3>Inspired by Cavehill <em>Faoi Anáil Bheann Mhadagáin</em></h3>
+          <p>Rising Above Belfast, Cavehill has watched over centuries of history. This gin is a tribute to that enduring presence - infused with botanicals inspired by the mountain's landscape. Unmistakably local, it captures the spirit of the hill and the city it guards - each sip echoing stories of the past, carried through its rugged trails and sweeping views.</p>
+          <h4 class="product-availability">In Stores Only</h4>
+        </div>
+
+        <div class="product-column">
+          <article class="product-card">
+            <div class="product-details">
+              <h3>Five Caves Premium Irish Gin</h3>
+              <p>Blended with unique flavours, this gin can be enjoyed in a variety of ways - whether you want it as a simple serve or in a more elegant beverage.</p>
+              <figure class="product-cocktail">
+                <img src="./images/Cocktail.jpg" alt="Five Caves gin cocktail serve" />
+              </figure>
+              <a class="button" href="#contact">Contact Us</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark" id="team">
+      <div class="section-inner">
+        <div class="section-copy">
+          <p class="eyebrow">The Team</p>
+          <h2 class="gold-heading">Trust the Process</h2>
+          <p>From collecting glasses to putting our bottle on shelves, we've worked across Belfast establishments for years and seen first-hand what it takes to make a good product.</p>
+          <p>A good spirit is not just about flavour; it is about personality.</p>
+          <p>As North Belfast residents, we chose to base the idea on something close to home.</p>
+        </div>
+
+        <div class="team-grid">
+          <article class="team-card">
+            <h3>Coworkers to Business Partners</h3>
+            <p>(L-R) Cathal, Reed & Callum started Five Caves Spirits with the a shared passion for the industry that has not been shown before. We want to give something back to the hospitality community that inspired us.</p>
+          </article>
+          <figure class="team-photo">
+            <img src="./images/Team.jpg" alt="Five Caves Spirits team" />
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="section-inner">
+        <div class="section-copy">
+          <p class="eyebrow">Contact Us</p>
+          <h2>Sales, Events & General Enquiries</h2>
+          <p>We are currently developing our network throughout Northern Ireland across bars, restaurants, hotels and independent retailers. If you would like more detail on where to buy our product please get in touch via our email or social media!</p>
+          
+        </div>
+
+        <div class="contact-column">
+          <div class="contact-card">
+            <h3>Five Caves Spirits</h3>
+            <ul class="contact-list">
+              <li>
+                <span>Email</span><br />
+                <a href="mailto:info@fivecavesspirits.com">info@fivecavesspirits.com</a>
+              </li>
+            </ul>
+            <div class="socials" aria-label="Social links">
+              <a href="https://www.instagram.com/fivecavesspirits/" target="_blank" rel="noopener noreferrer">Instagram</a>
+              <a href="https://www.facebook.com/profile.php?id=61573313424275" target="_blank" rel="noopener noreferrer">Facebook</a>
+              <a href="https://www.tiktok.com/@fivecaves" target="_blank" rel="noopener noreferrer">TikTok</a>
+              <a href="https://www.linkedin.com/company/five-caves-spirits-ltd/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            </div>
+          </div>
+          <p class="contact-note">Are you a hospitality venue or retailer that is interested in stocking our product? If so, please feel free to get in touch with our team to discuss wholesale enquiries.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <aside class="age-strip" aria-label="Alcohol notice">Please enjoy responsibly. 18+ only.</aside>
+
+  <footer class="footer">
+    &copy; <span id="year"></span> Five Caves Spirits Ltd. All rights reserved.
+    <span class="footer-credits">Design by Dave Hanna, with additional designs by Ellie McKay. Photography by Tom Hagan at <a href="https://roxcammedia.com" target="_blank" rel="noopener noreferrer">Roxcam Media</a>.</span>
+  </footer>
+
+  <script>
+    const root = document.documentElement;
+    const header = document.getElementById("siteHeader");
+    const navToggle = document.getElementById("navToggle");
+    const navLinks = document.getElementById("navLinks");
+    let scrollFrame = null;
+    let resizeFrame = null;
+
+    function clamp(value, min, max) {
+      return Math.max(min, Math.min(max, value));
+    }
+
+    function updateScrollEffects() {
+      if (scrollFrame) return;
+
+      scrollFrame = requestAnimationFrame(() => {
+        const scrollY = window.scrollY || window.pageYOffset;
+        const width = window.innerWidth;
+        const isMobile = width <= 640;
+        const travel = isMobile ? clamp(scrollY * -0.055, -82, 8) : clamp(scrollY * -0.045, -150, 40);
+        const scale = isMobile ? clamp(1.04 - scrollY / 5000, .96, 1.04) : clamp(1.12 - scrollY / 5200, .98, 1.12);
+        const product = document.getElementById("product");
+        const productTop = product ? product.offsetTop : window.innerHeight;
+        const mobileFadeStart = Math.max(0, productTop - window.innerHeight * 0.95);
+        const mobileFadeEnd = Math.max(mobileFadeStart + 1, productTop - window.innerHeight * 0.72);
+        const mobileOpacity = scrollY >= mobileFadeEnd ? 0 : 1 - clamp((scrollY - mobileFadeStart) / (mobileFadeEnd - mobileFadeStart), 0, 1);
+
+        root.style.setProperty("--bottle-y", `${travel}px`);
+        root.style.setProperty("--bottle-scale", scale.toFixed(3));
+        root.style.setProperty("--bottle-opacity", isMobile ? mobileOpacity.toFixed(3) : "1");
+        header.classList.toggle("is-scrolled", scrollY > 36);
+        scrollFrame = null;
+      });
+    }
+
+    function setMenu(open) {
+      navLinks.classList.toggle("open", open);
+      navToggle.setAttribute("aria-expanded", String(open));
+      document.body.classList.toggle("menu-open", open);
+    }
+
+    navToggle.addEventListener("click", () => setMenu(!navLinks.classList.contains("open")));
+    navLinks.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => setMenu(false));
+    });
+
+    window.addEventListener("scroll", updateScrollEffects, { passive: true });
+    function computeInitialBottleOffset() {
+      const bottle = document.getElementById('parallaxBottle');
+      const hero = document.getElementById('home');
+      if (!bottle || !hero) return;
+      if (window.innerWidth <= 1180) {
+        root.style.setProperty('--bottle-initial-offset', '0px');
+        return;
+      }
+      root.style.setProperty('--bottle-opacity', '1');
+      const bottleRect = bottle.getBoundingClientRect();
+      const bottleStyle = getComputedStyle(bottle);
+      if (bottleStyle.position !== 'fixed') {
+        root.style.setProperty('--bottle-initial-offset', '0px');
+        return;
+      }
+      const bottomPx = parseFloat(bottleStyle.bottom || '0px') || 0;
+      const viewportHeight = window.innerHeight;
+      const desiredTop = hero.offsetTop + hero.offsetHeight * 0.5 - bottleRect.height / 2;
+      const currentTop = viewportHeight - bottomPx - bottleRect.height;
+      const offset = desiredTop - currentTop;
+      root.style.setProperty('--bottle-initial-offset', `${offset}px`);
+    }
+
+    function refreshBottleLayout() {
+      if (resizeFrame) cancelAnimationFrame(resizeFrame);
+      resizeFrame = requestAnimationFrame(() => {
+        resizeFrame = requestAnimationFrame(() => {
+          computeInitialBottleOffset();
+          updateScrollEffects();
+          resizeFrame = null;
+        });
+      });
+    }
+
+    window.addEventListener("resize", refreshBottleLayout);
+
+    window.addEventListener('load', () => {
+      refreshBottleLayout();
+    });
+
+    computeInitialBottleOffset();
+    updateScrollEffects();
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
